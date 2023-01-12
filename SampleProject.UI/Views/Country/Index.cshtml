@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    bool IsPost = false;
+    var IsSuccess = false;
+    if (ViewData["IsSuccess"]!=null)
+    {
+         IsPost = true;
+         IsSuccess = (bool)ViewData["IsSuccess"];
+
+    }
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Country Ekleme</h1>
+
+<form asp-action="Index" asp-controller="Country" method="post">
+    <div class="form-group">
+        <label for="countryName">Country Name</label>
+        <input name="countryName" type="text" class="form-control" id="countryName" placeholder="Enter Country Name">
+    </div>
+    <button type="submit" class="btn btn-primary">Ekle</button>
+</form>
+@if (IsPost)
+{
+    @if (IsSuccess)
+    {
+        <div class="alert alert-success" role="alert">
+            Ekleme İşlemi Başarılı
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            Ekleme İşlemi Başarısız
+        </div>
+    }
+}
+

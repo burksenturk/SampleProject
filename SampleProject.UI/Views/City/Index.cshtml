@@ -1,0 +1,50 @@
+﻿@model List<CountryModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool IsPost = false;
+    var IsSuccess = false;
+    if (TempData["IsSuccess"] != null)
+    {
+        IsPost = true;
+        IsSuccess = (bool)TempData["IsSuccess"];
+
+    }
+}
+
+<h1>City İşlemleri</h1>
+
+<form asp-action="Index" asp-controller="City" method="post">
+    <div class="form-group">
+        <label for="cityName">Country Name</label>
+        <input name="cityName" type="text" class="form-control" id="cityName" placeholder="Enter City Name">
+    </div>
+
+    <select name="selectedCountry" class="form-control form-select" aria-label="Ülke Seçiniz">
+        <option selected>Ülke Seçiniz</option>
+        @foreach (var country in Model)
+        {
+        <option value="@country.Id">@country.Name</option>
+        }
+
+
+    </select>
+
+    <button type="submit" class="btn btn-primary">Ekle</button>
+</form>
+
+@if (IsPost)
+{
+    @if (IsSuccess)
+    {
+        <div class="alert alert-success" role="alert">
+            Ekleme İşlemi Başarılı
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            Ekleme İşlemi Başarısız
+        </div>
+    }
+}

@@ -1,0 +1,55 @@
+﻿@model CityUpdateModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool IsPost = false;
+    var IsSuccess = false;
+    if (TempData["IsSuccess"] != null)
+    {
+        IsPost = true;
+        IsSuccess = (bool)TempData["IsSuccess"];
+
+    }
+}
+
+<h1>City İşlemleri</h1>
+
+<form asp-action="Update" asp-controller="City" method="post">
+    <input type="hidden" name="Id" value="@Model.City.Id" />
+    <div class="form-group">
+        <label for="cityName">Country Name</label>
+        <input name="Name" type="text" class="form-control" id="cityName" placeholder="@Model.City.Name"/>
+    </div>
+
+    <select name="CountryId" class="form-control form-select" aria-label="Ülke Seçiniz">
+        @foreach (var country in Model.Countries)
+        {
+            if (country.Id==Model.City.CountryId)
+            {
+                <option selected value="@country.Id">@country.Name</option>
+
+            }
+            <option value="@country.Id">@country.Name</option>
+        }
+
+
+    </select>
+
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+</form>
+
+@if (IsPost)
+{
+    @if (IsSuccess)
+    {
+        <div class="alert alert-success" role="alert">
+            Güncelleme İşlemi Başarılı
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            Güncelleme İşlemi Başarısız
+        </div>
+    }
+}

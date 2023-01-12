@@ -53,13 +53,13 @@ namespace SampleProject.Api.Controllers
             return Ok(await _cityService.Update(cityUpdateRequest));
 
         }
-        [HttpDelete]
+        [HttpGet("delete")]
         public async Task<IActionResult> Delete(int Id)
         {
             return Ok(await _cityService.Delete(Id));
         }
 
-        [HttpGet("getbyıd")]
+        [HttpGet("getbyid")]
         public async Task<IActionResult> Get(int Id)
         {
             return Ok(await _cityService.Get(x => x.Id == Id, x => x.Country));

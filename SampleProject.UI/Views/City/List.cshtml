@@ -1,0 +1,33 @@
+﻿@model List<CityModel>
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>List</h1>
+
+<td><a href="@Url.Action("Index","City")">Ekle</a></td>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">City Name</th>
+            <th scope="col">CountryName</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.Id</th>
+                <td>@item.Name</td>
+                <td>@item.Country.Name</td>
+                <td><a href="@Url.Action("Update","City",new {cityId=item.Id})">Güncelle</a></td>
+                <td><a href="@Url.Action("Delete","City",new {cityId=item.Id})">Sil</a></td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>
